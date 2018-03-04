@@ -55,7 +55,7 @@ public class Principal {
 				break;
 			case 3:
 	
-				Usuarios users = new Usuarios();
+				Usuario users = new Usuario();
 				System.out.print("Introduce el usuario: ");
 				users.setUser(input2.nextLine());
 				System.out.print("Introduce la contraseña: ");
