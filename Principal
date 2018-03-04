@@ -17,8 +17,10 @@ public class Principal {
 		int copiasPrest = 0;
 		int opcio = 0;
 		String busqueda = "";
-		String archivo = "archivo.txt"; //Ruta del archivo al que hacemos referencia
-		File file = new File(archivo); //Creamos el archivo a través de la ruta que le damos
+		String archivo = "archivo.txt"; //Ruta con el archivo que guarda los libros
+		String archivo2 = "usuarios.txt";	//Ruta con el archivo que guarda los usuarios
+		File booksFile = new File(archivo); //Creamos el archivo a través de la ruta que le damos
+		File usersFile = new File(archivo2); //Creamos el archivo a través de la ruta que le damos
 		
 		//inicializamos los constructores
 		Libro libro = new Libro(titulo,autor,copias,copiasPrest);
@@ -28,16 +30,16 @@ public class Principal {
 			Scanner input2 = new Scanner(System.in);
 			System.out.println("\n1 - Buscar libro"
 					+ "\n2 - Introducir libro"
-					+ "\n3 - Salir");
+					+ "\n3 - Login"
+					+ "\n4 - Salir");
 			System.out.print("Escoge una opción: ");
 			opcio = input.nextInt();
 
 			switch(opcio){
 			case 1:
-				Scanner intro = new Scanner(file); //Escaneamos el archivo
 				System.out.print("Introduce el libro que deseas buscar: ");
 				busqueda = input2.nextLine();
-				Search buscar = new Search(busqueda, intro); //Usamos la clase Search para buscar lo que introducimos
+				Search buscar = new Search(busqueda, new Scanner(booksFile)); //Usamos la clase Search para buscar lo que introducimos
 				break;
 			case 2:
 				escribir.setFile(archivo);
@@ -52,9 +54,18 @@ public class Principal {
 				escribir.writeFile(libro.getTitulo(),libro.getAutor(),libro.getCopias(),libro.getCopiasprest());
 				break;
 			case 3:
+	
+				Usuarios users = new Usuarios();
+				System.out.print("Introduce el usuario: ");
+				users.setUser(input2.nextLine());
+				System.out.print("Introduce la contraseña: ");
+				users.setPassword(input2.nextLine());
+				users.validaUsuario(new Scanner(usersFile));
+				break;
+			case 4:
 				System.out.print("¡Hasta pronto!");
 			}
-		}while(opcio != 3);
+		}while(opcio != 4);
 		
 	}
 }
