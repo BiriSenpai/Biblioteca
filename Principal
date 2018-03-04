@@ -1,0 +1,60 @@
+package grupo;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Principal {
+
+	public static void main(String[] args) throws IOException{
+		
+		Scanner input = new Scanner(System.in);
+		
+		//inicializamos las variables
+		String titulo = "";
+		String autor = "";
+		int copias = 0;
+		int copiasPrest = 0;
+		int opcio = 0;
+		String busqueda = "";
+		String archivo = "archivo.txt"; //Ruta del archivo al que hacemos referencia
+		File file = new File(archivo); //Creamos el archivo a través de la ruta que le damos
+		
+		//inicializamos los constructores
+		Libro libro = new Libro(titulo,autor,copias,copiasPrest);
+		Write escribir = new Write();
+		//creamos el menú
+		do{
+			Scanner input2 = new Scanner(System.in);
+			System.out.println("\n1 - Buscar libro"
+					+ "\n2 - Introducir libro"
+					+ "\n3 - Salir");
+			System.out.print("Escoge una opción: ");
+			opcio = input.nextInt();
+
+			switch(opcio){
+			case 1:
+				Scanner intro = new Scanner(file); //Escaneamos el archivo
+				System.out.print("Introduce el libro que deseas buscar: ");
+				busqueda = input2.nextLine();
+				Search buscar = new Search(busqueda, intro); //Usamos la clase Search para buscar lo que introducimos
+				break;
+			case 2:
+				escribir.setFile(archivo);
+				System.out.print("Introduce el título del libro: ");
+				libro.setTitulo(input2.nextLine());
+				System.out.print("Introduce el autor del libro: ");
+				libro.setAutor(input2.nextLine());
+				System.out.print("Introduce el número de copias del libro: ");
+				libro.setCopias(input2.nextInt());
+				System.out.print("Introduce el número de copias del libro: ");
+				libro.setCopiasprest(input2.nextInt());
+				escribir.writeFile(libro.getTitulo(),libro.getAutor(),libro.getCopias(),libro.getCopiasprest());
+				break;
+			case 3:
+				System.out.print("¡Hasta pronto!");
+			}
+		}while(opcio != 3);
+		
+	}
+}
