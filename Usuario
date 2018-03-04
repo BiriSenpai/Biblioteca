@@ -1,0 +1,49 @@
+package grupo;
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Usuario {
+	private String user;
+	private String password;
+	private int grupo;
+	
+	public String getUser() {
+		return this.user;
+	}
+	public void setUser(String user) {
+		this.user = user;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public int getGrupo(){
+		return this.grupo;
+	}
+	public void setGrupo(int grupo){
+		this.grupo = grupo;
+	}
+	
+
+	public Usuario(){
+	}
+	
+	public int validaUsuario(Scanner validar) throws FileNotFoundException{
+		while (validar.hasNextLine()) {
+            final String line = validar.nextLine();
+            String[] texto = line.split("-");
+            if(texto[0].equals(this.user) && texto[1].equals(this.password)){
+            	System.out.println("Login correcto");
+            	this.grupo = Integer.parseInt(texto[2]);
+            }else{
+            	System.out.print("Login incorrecto");
+            }
+		}
+		return grupo;
+	}
+}
