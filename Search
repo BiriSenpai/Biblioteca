@@ -1,0 +1,21 @@
+package grupo;
+
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Search {
+	
+	public Search(String busqueda, Scanner intro) throws FileNotFoundException{
+		
+		while (intro.hasNextLine()) {
+            final String line = intro.nextLine();
+            if(line.contains(busqueda)){
+				String[] texto = line.split("-");
+            	System.out.println("Título: "+texto[0]
+            			+"\nAutor: "+texto[1]
+            			+"\nCopias: "+texto[2]
+            			+"\nCopias en préstamo: "+texto[3]);
+            }
+		}
+	}
+}
